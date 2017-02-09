@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <declare-styleable name="LooperRippleView">
+
+    <attr name="radius" format="integer" />
+    <attr name="stroke_width" format="integer" />
+    <attr name="duration" format="integer" />
+    <attr name="repeat_count" format="integer" />
+
+    <attr name="two_ripple_times" format="float" />
+    <attr name="three_ripple_times" format="float" />
+    <attr name="max_more_radius_times" format="float" />
+
+  </declare-styleable>
+
+</resources>

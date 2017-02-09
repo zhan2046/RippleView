@@ -1,112 +1,221 @@
-<!--lang: java-->
-####效果如图：
+
+Looper-Ripple-View
+===============
+
+A simple looper ripple view for Android
+
+
+-----
+
 
 ![](https://github.com/ruzhan123/RippleView/raw/master/gif/ripple.gif)
 
-</br>
-
-我的博客：[详解](https://ruzhan123.github.io/2016/07/02/2016-07-02-18-00-RippleView%E6%B0%B4%E6%B3%A2%E7%BA%B9%EF%BC%8C%E6%B6%9F%E6%BC%AA%E6%95%88%E6%9E%9C/)
-
-一个模拟涟漪，水波纹的自定义View。核心类就一个：RippleView.java
-
-
-使用方式如下：
 
 
 
-1，把RippleView.java拷贝到你的工程里，布局文件中直接使用（注意宽度和高度，特殊需求请自行设置好）：
+Looper-Ripple-View use **Animation** change circle radius draw circle
+
+[![](https://jitpack.io/v/ruzhan123/Looper-Ripple-View.svg)](https://jitpack.io/#ruzhan123/Looper-Ripple-View)
+
+Gradle
+------
+
+Add it in your root build.gradle at the end of repositories:
 
 
 ```java
 
-	    <RelativeLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="match_parent"
-	        android:layout_weight="1"
-	        android:background="@color/blue_bg">
-	
-	        <com.zhan.rippleview.widget.RippleView
-	            android:id="@+id/root_rv"
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent" />
-	
-	        <TextView
-	            android:id="@+id/root_tv"
-	            android:text="0%"
-	            android:gravity="center"
-	            android:textSize="16sp"
-	            android:textColor="@android:color/white"
-	            android:layout_centerInParent="true"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content" />
-	    </RelativeLayout>
-
-
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 ```
 
+Add the dependency:
 
-2，找到RippleView对象，设置状态监听。
-
-```java
-	
-		mRippleView = (RippleView) findViewById(R.id.root_rv);
-		mRippleView.setRippleStateListener(this);
-
-
-		 @Override
-	    public void startRipple() {
-	        
-	    }
-	
-	    @Override
-	    public void stopRipple() {
-	
-	    }
-	
-	    @Override
-	    public void onRippleUpdate(ValueAnimator animation) {
-
-	    }
-
-
-```
-
-3，你可以使用以下方法进行设置，也可以自行按需求添加新的方法：
 
 ```java
 
-	    /** 水波纹状态接口对象注入 */
-	    public void setRippleStateListener(RippleStateListener listener) 
-	
-		/** 开启水波纹 */
-		public void startRipple()
-	
-	    /** 关闭水波纹 */
-	    public void stopRipple() 
-	
-	    /** 设置圆半径 */
-	    public void setRadius(int radius) 
-	
-	    /** 设置圆边线宽度 */
-	    public void setStrokeWidth(int strokeWidth) 
-	
-	    /** 设置动画时间 */
-	    public void setDuration(int duration) 
-	
-	    /** 设置动画次数 */
-	    public void setRepeatCount(int repeatCount) 
-	
-	    /** 设置圆心 */
-	    public void setCirclePoint(float x ,float y) 
-	
-	    /** 设置空心外圆颜色 */
-	    public void setOutStrokePaintColor(int color) 
-	
-	    /** 设置空心内圆颜色 */
-	    public void setInStrokePaintColor(int color) 
-	
-	    /** 设置实心内圆颜色 */
-	    public void setInPaintColor(int color) 
+	dependencies {
+	        compile 'com.github.ruzhan123:Looper-Ripple-View:v1.0'
+	}
+```
 
+Usage
+-----
+
+```xml
+
+	<zhan.looper_ripple_view.LooperRippleView
+	    android:id="@+id/root_rv"
+	    app:radius="200"
+	    app:stroke_width="1"
+	    app:duration="3000"
+	    app:repeat_count="1"
+	    app:two_ripple_times="1.5"
+	    app:three_ripple_times="2.0"
+	    app:max_more_radius_times="1.5"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent" />
+```
+
+```java
+
+	public void startRipple() {
+	if (mValueAnimator == null) {
+	  mValueAnimator = new ValueAnimator();
+	  mValueAnimator.setInterpolator(mInterpolator);
+	  mValueAnimator.setIntValues(mRadius,
+	      (int) (mCx > mCy ? mCx * mMaxMoreRadiusTimes : mCy * mMaxMoreRadiusTimes));
+	  mValueAnimator.setDuration(mDuration);
+	  mValueAnimator.setRepeatCount(mRepeatCount);
+	  mValueAnimator.addUpdateListener(this);
+	  mValueAnimator.addListener(this);
+	  mValueAnimator.start();
+	} else {
+	  if (!mValueAnimator.isRunning()) {
+	    mValueAnimator.start();
+	  }
+	}
+	}
+```
+
+
+```java
+
+	@Override public void onAnimationUpdate(ValueAnimator animation) {
+	mChangeRadius = (int) animation.getAnimatedValue();
+	postInvalidate();
+	for (RippleAnimationListener listener : mRippleAnimationListeners) {
+	  listener.onAnimationUpdate(animation);
+	}
+	}
+```
+
+```java
+
+	public void stopRipple() {
+	if (mValueAnimator != null) {
+	  mValueAnimator.end();
+	}
+	}
+```
+
+expend
+-------
+
+
+```java
+
+	public interface RippleAnimationListener {
+	
+	void onAnimationUpdate(ValueAnimator animation);
+	
+	void onAnimationStart(Animator animation);
+	
+	void onAnimationEnd(Animator animation);
+	
+	void onAnimationCancel(Animator animation);
+	
+	void onAnimationRepeat(Animator animation);
+	}
+```
+
+```java
+
+	public void setRippleStateListener(RippleAnimationListener listener) {
+	if (!mRippleAnimationListeners.contains(listener)) {
+	  mRippleAnimationListeners.add(listener);
+	}
+	}
+	
+	public void removeRippleStateListener(RippleAnimationListener listener) {
+	if (mRippleAnimationListeners.contains(listener)) {
+	  mRippleAnimationListeners.remove(listener);
+	}
+	}
+	
+	public void removeRippleStateListenerAll() {
+	mRippleAnimationListeners.clear();
+	}
+	
+	public void setRadius(int radius) {
+	mRadius = radius;
+	mChangeRadius = radius;
+	}
+	
+	public void setStrokeWidth(int strokeWidth) {
+	mStrokeWidth = strokeWidth;
+	}
+	
+	public void setDuration(int duration) {
+	mDuration = duration;
+	}
+	
+	public void setRepeatCount(int repeatCount) {
+	mRepeatCount = repeatCount;
+	}
+	
+	public void setCirclePoint(float x, float y) {
+	mCx = x;
+	mCy = y;
+	}
+	
+	public void setOutStrokePaintColor(int color) {
+	mOutStrokePaint.setColor(color);
+	}
+	
+	public void setInStrokePaintColor(int color) {
+	mInStrokePaint.setColor(color);
+	}
+	
+	public void setInPaintColor(int color) {
+	mInPaint.setColor(color);
+	}
+	
+	public void setInterpolator(Interpolator interpolator) {
+	mInterpolator = interpolator;
+	}
+	
+	public void setTwoRippleTimes(float times) {
+	mTwoRippleTimes = times;
+	}
+	
+	public float getTwoRippleTimes() {
+	return mTwoRippleTimes;
+	}
+	
+	public void setThreeRippleTimes(float times) {
+	mThreeRippleTimes = times;
+	}
+	
+	public float getThreeRippleTimes() {
+	return mThreeRippleTimes;
+	}
 
 ```
+
+Developed by
+-------
+
+ ruzhan - <a href='javascript:'>ruzhan333@gmail.com</a>
+
+
+License
+-------
+
+    Copyright 2017 ruzhan
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
