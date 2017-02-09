@@ -39,7 +39,7 @@ Add the dependency:
 ```java
 
 	dependencies {
-	         compile 'com.github.ruzhan123:RippleView:v1.1'
+	         compile 'com.github.ruzhan123:RippleView:v1.0'
 	}
 ```
 
