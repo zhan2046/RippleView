@@ -61,48 +61,6 @@ Usage
 	    android:layout_height="match_parent" />
 ```
 
-```java
-
-	public void startRipple() {
-	if (mValueAnimator == null) {
-	  mValueAnimator = new ValueAnimator();
-	  mValueAnimator.setInterpolator(mInterpolator);
-	  mValueAnimator.setIntValues(mRadius,
-	      (int) (mCx > mCy ? mCx * mMaxMoreRadiusTimes : mCy * mMaxMoreRadiusTimes));
-	  mValueAnimator.setDuration(mDuration);
-	  mValueAnimator.setRepeatCount(mRepeatCount);
-	  mValueAnimator.addUpdateListener(this);
-	  mValueAnimator.addListener(this);
-	  mValueAnimator.start();
-	} else {
-	  if (!mValueAnimator.isRunning()) {
-	    mValueAnimator.start();
-	  }
-	}
-	}
-```
-
-
-```java
-
-	@Override public void onAnimationUpdate(ValueAnimator animation) {
-	mChangeRadius = (int) animation.getAnimatedValue();
-	postInvalidate();
-	for (RippleAnimationListener listener : mRippleAnimationListeners) {
-	  listener.onAnimationUpdate(animation);
-	}
-	}
-```
-
-```java
-
-	public void stopRipple() {
-	if (mValueAnimator != null) {
-	  mValueAnimator.end();
-	}
-	}
-```
-
 expend
 -------
 
@@ -121,9 +79,6 @@ expend
 	
 	void onAnimationRepeat(Animator animation);
 	}
-```
-
-```java
 
 	public void setRippleStateListener(RippleAnimationListener listener) {
 	if (!mRippleAnimationListeners.contains(listener)) {
@@ -140,7 +95,10 @@ expend
 	public void removeRippleStateListenerAll() {
 	mRippleAnimationListeners.clear();
 	}
-	
+```
+
+```java
+
 	public void setRadius(int radius) {
 	mRadius = radius;
 	mChangeRadius = radius;

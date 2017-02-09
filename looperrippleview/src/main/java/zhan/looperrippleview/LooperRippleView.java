@@ -1,4 +1,4 @@
-package zhan.looper_ripple_view;
+package zhan.looperrippleview;
 
 import android.animation.Animator;
 import android.animation.TimeInterpolator;

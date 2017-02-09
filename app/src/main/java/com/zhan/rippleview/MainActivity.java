@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import zhan.looper_ripple_view.LooperRippleView;
+import zhan.looperrippleview.LooperRippleView;
 
 public class MainActivity extends AppCompatActivity implements LooperRippleView.RippleAnimationListener {
 
