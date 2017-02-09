@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import zhan.looperrippleview.LooperRippleView;
+import zhan.rippleview.RippleView;
 
-public class MainActivity extends AppCompatActivity implements LooperRippleView.RippleAnimationListener {
+public class MainActivity extends AppCompatActivity implements RippleView.RippleAnimationListener {
 
-  private LooperRippleView mLooperRippleView;
+  private RippleView mRippleView;
   private TextView mTextView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -21,20 +21,20 @@ public class MainActivity extends AppCompatActivity implements LooperRippleView.
   }
 
   private void initListener() {
-    mLooperRippleView.setRippleStateListener(this);
+    mRippleView.setRippleStateListener(this);
   }
 
   private void initView() {
-    mLooperRippleView = (LooperRippleView) findViewById(R.id.root_rv);
+    mRippleView = (RippleView) findViewById(R.id.root_rv);
     mTextView = (TextView) findViewById(R.id.root_tv);
   }
 
   public void start(View v) {
-    mLooperRippleView.startRipple();
+    mRippleView.startRipple();
   }
 
   public void stop(View v) {
-    mLooperRippleView.stopRipple();
+    mRippleView.stopRipple();
   }
 
   @Override public void onAnimationUpdate(ValueAnimator animation) {

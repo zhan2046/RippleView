@@ -1,8 +1,8 @@
 
-Looper-Ripple-View
+RippleView
 ===============
 
-A simple looper ripple view for Android
+A simple ripple view for Android
 
 
 -----
@@ -13,9 +13,9 @@ A simple looper ripple view for Android
 
 
 
-Looper-Ripple-View use **Animation** change circle radius draw circle
+RippleView use **Animation** change circle radius draw circle
 
-[![](https://jitpack.io/v/ruzhan123/Looper-Ripple-View.svg)](https://jitpack.io/#ruzhan123/Looper-Ripple-View)
+[![](https://jitpack.io/v/ruzhan123/RippleView.svg)](https://jitpack.io/#ruzhan123/RippleView)
 
 Gradle
 ------
@@ -39,7 +39,7 @@ Add the dependency:
 ```java
 
 	dependencies {
-	        compile 'com.github.ruzhan123:Looper-Ripple-View:v1.0'
+	         compile 'com.github.ruzhan123:RippleView:v1.1'
 	}
 ```
 
@@ -48,7 +48,7 @@ Usage
 
 ```xml
 
-	<zhan.looper_ripple_view.LooperRippleView
+	<zhan.rippleview.RippleView
 	    android:id="@+id/root_rv"
 	    app:radius="200"
 	    app:stroke_width="1"

@@ -11,7 +11,7 @@
         android:layout_weight="1"
         android:background="@color/blue_bg">
 
-        <zhan.looperrippleview.LooperRippleView
+        <zhan.rippleview.RippleView
             android:id="@+id/root_rv"
             app:radius="200"
             app:stroke_width="1"

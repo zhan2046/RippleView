@@ -1,4 +1,4 @@
-package zhan.looperrippleview;
+package zhan.rippleview;
 
 import android.animation.Animator;
 import android.animation.TimeInterpolator;
@@ -18,7 +18,7 @@ import java.util.List;
  * Created by zhan on 2017/2/10.
  *
  */
-public class LooperRippleView extends View
+public class RippleView extends View
     implements ValueAnimator.AnimatorUpdateListener, Animator.AnimatorListener {
 
   /** 默认半径 dp */
@@ -59,31 +59,31 @@ public class LooperRippleView extends View
   private float mThreeRippleTimes;
   private float mMaxMoreRadiusTimes;
 
-  public LooperRippleView(Context context) {
+  public RippleView(Context context) {
     this(context, null);
   }
 
-  public LooperRippleView(Context context, AttributeSet attrs) {
+  public RippleView(Context context, AttributeSet attrs) {
     super(context, attrs);
     init(attrs);
   }
 
-  public LooperRippleView(Context context, AttributeSet attrs, int defStyleAttr) {
+  public RippleView(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     init(attrs);
   }
 
   private void init(AttributeSet attrs) {
-    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.LooperRippleView, 0, 0);
-    mRadius = a.getInteger(R.styleable.LooperRippleView_radius, dip2px(NORMAL_RADIUS));
-    mStrokeWidth = a.getInteger(R.styleable.LooperRippleView_stroke_width, 1);
-    mDuration = a.getInteger(R.styleable.LooperRippleView_duration, NORMAL_DURATION);
-    mRepeatCount = a.getInteger(R.styleable.LooperRippleView_repeat_count, 1);
+    TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.RippleView, 0, 0);
+    mRadius = a.getInteger(R.styleable.RippleView_radius, dip2px(NORMAL_RADIUS));
+    mStrokeWidth = a.getInteger(R.styleable.RippleView_stroke_width, 1);
+    mDuration = a.getInteger(R.styleable.RippleView_duration, NORMAL_DURATION);
+    mRepeatCount = a.getInteger(R.styleable.RippleView_repeat_count, 1);
     mTwoRippleTimes =
-        a.getFloat(R.styleable.LooperRippleView_two_ripple_times, NORMAL_TWO_RIPPLE_TIMES);
+        a.getFloat(R.styleable.RippleView_two_ripple_times, NORMAL_TWO_RIPPLE_TIMES);
     mThreeRippleTimes =
-        a.getFloat(R.styleable.LooperRippleView_three_ripple_times, NORMAL_THREE_RIPPLE_TIMES);
-    mMaxMoreRadiusTimes = a.getFloat(R.styleable.LooperRippleView_max_more_radius_times,
+        a.getFloat(R.styleable.RippleView_three_ripple_times, NORMAL_THREE_RIPPLE_TIMES);
+    mMaxMoreRadiusTimes = a.getFloat(R.styleable.RippleView_max_more_radius_times,
         NORMAL_MAX_MORE_RADIUS_TIMES);
     a.recycle();
 
