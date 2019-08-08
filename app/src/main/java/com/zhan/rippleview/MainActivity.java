@@ -3,12 +3,15 @@ package com.zhan.rippleview;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import zhan.rippleview.RippleView;
 
-public class MainActivity extends AppCompatActivity implements RippleView.RippleAnimationListener {
+public class MainActivity extends AppCompatActivity implements
+        RippleView.RippleAnimationListener {
 
   private RippleView mRippleView;
   private TextView mTextView;
