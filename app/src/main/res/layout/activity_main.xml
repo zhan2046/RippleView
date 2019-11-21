@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/blue_bg">
+        android:background="@color/rippleBg">
 
         <zhan.rippleview.RippleView
             android:id="@+id/rippleView"
