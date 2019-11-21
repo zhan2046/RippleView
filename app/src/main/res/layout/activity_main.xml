@@ -12,7 +12,7 @@
         android:background="@color/blue_bg">
 
         <zhan.rippleview.RippleView
-            android:id="@+id/root_rv"
+            android:id="@+id/rippleView"
             app:radius="200"
             app:stroke_width="1"
             app:duration="3000"
